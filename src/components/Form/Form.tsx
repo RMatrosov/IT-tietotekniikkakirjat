@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, {FunctionComponent, ReactElement, useState} from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {Box, Button, FormControlLabel, Switch, TextField} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {useStyles} from "./styles";
+import {InitialStateType} from "../../redux/reducers/cart";
 
 const schema = yup.object().shape({
   firstName: yup
@@ -17,7 +18,6 @@ const schema = yup.object().shape({
       .required("Syötä sukunimi"),
   address: yup
       .string()
-      .matches()
       .required("Syötä osoite"),
   post: yup
       .number()
@@ -28,8 +28,12 @@ const schema = yup.object().shape({
       .required("Syötä kaupunki"),
 });
 
+type FormTypesProps = {
+    items: InitialStateType
+}
 
-function Form(props) {
+
+const Form: FunctionComponent<FormTypesProps> = ({items}): ReactElement => {
 
   const classes = useStyles();
 
@@ -37,9 +41,9 @@ function Form(props) {
     mode: "onBlur",
     resolver: yupResolver(schema)
   });
-  const onSubmit = (data) => {
+  const onSubmit = (data: any) => {
     alert(JSON.stringify(data));
-    console.log(props.items)
+    console.log(items)
   };
 
   const [hasPhone, setHasPhone] = useState(false);
@@ -81,7 +85,6 @@ function Form(props) {
 
         <Box className={classes.box}>
           <TextField variant="outlined"
-                     name="firstName"
                      label="Etunimi"
                      id="firstName"
                      multiline
@@ -97,7 +100,6 @@ function Form(props) {
                      label="Sukunimi"
                      multiline
                      className={classes.TextField}
-                     name="lastName"
                      id="lastName"
                      placeholder="Sukunimi" type="text"
                      error={!!errors.lastName}

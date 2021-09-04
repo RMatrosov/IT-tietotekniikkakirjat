@@ -5,7 +5,7 @@ import filters from "./filter";
 import cart from "./cart";
 import paginate from "./paginate";
 
-
+export type RootReducerType = typeof rootReducer
 
 
 const rootReducer = combineReducers({

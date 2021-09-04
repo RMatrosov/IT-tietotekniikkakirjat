@@ -14,93 +14,92 @@ import MenuBookTwoToneIcon from '@material-ui/icons/MenuBookTwoTone';
 import Form from "../Form/Form";
 import {useStyles} from "./styles";
 import {minusCartItem, plusCartItem, removeCartItem} from "../../redux/action/cart";
-
-
+import {AppStateType} from "../../redux/store";
 
 
 const Cart = () => {
-  const classes = useStyles();
+    const classes = useStyles();
 
-  const {totalPrice, totalCount, items} = useSelector(({cart}) => cart);
-  const dispatch = useDispatch()
+    const {totalPrice, totalCount, items} = useSelector((state: AppStateType) => state.cart);
+    const dispatch = useDispatch()
 
 
-  function onRemove(id) {
-    if (window.confirm('Poistaa?')) {
-      dispatch(removeCartItem(id))
+    function onRemove(id: string) {
+        if (window.confirm('Poistaa?')) {
+            dispatch(removeCartItem(id))
+        }
     }
-  }
 
-  function onMinus(id) {
-    dispatch(minusCartItem(id))
-  }
+    function onMinus(id: string) {
+        dispatch(minusCartItem(id))
+    }
 
-  function onPlus(id) {
-    dispatch(plusCartItem(id))
-  }
+    function onPlus(id: string) {
+        dispatch(plusCartItem(id))
+    }
 
-  const addedBooks = Object.keys(items).map((key) => {
-    return items[key].items[0];
-  });
+    const addedBooks = Object.keys(items).map((key) => {
+        return items[key].items[0];
+    });
 
-  return (
-      <Container className={classes.container}>
-        <Link to='/' className={classes.link}>
-          <Button variant="contained" color="primary">
-            Back
-          </Button>
-        </Link>
-        <Typography component="h2" variant="h6">
-          Ostoskori
-        </Typography>
-        <Typography component="h2" variant="h6">
-          Yhteensä {totalPrice.toFixed(2)} €
-        </Typography>
-        <Box className={classes.boxWrapper}>
-          <Box className={classes.box}>
-            {totalCount ? addedBooks.map((item) => (
-                <Card className={classes.root} key={item.id}>
-                  <CardMedia
-                      className={classes.cover}
-                      image={`https:${item.imgSmall}`}
-                      title={item.title}
-                  />
-                  <div className={classes.details}>
-                    <CardContent className={classes.content}>
-                      <Typography component="h6" variant="h6">
-                        {item.title}
-                      </Typography>
-                      <Typography variant="subtitle1" color="textSecondary">
-                        {item.author}
-                      </Typography>
-                      <Typography variant="h6" color="initial">
-                        {items[item.id].totalPrice.toFixed(2)} €
-                      </Typography>
-                    </CardContent>
-                    <div className={classes.controls}>
-                      <IconButton aria-label="minus" onClick={() => onMinus(item.id)}>
-                        <RemoveIcon/>
-                      </IconButton>
-                      <IconButton aria-label="delete" onClick={() => onRemove(item.id)}>
-                        <DeleteIcon/>
-                      </IconButton>
-                      <IconButton aria-label="plus" onClick={() => onPlus(item.id)}>
-                        <AddIcon/>
-                      </IconButton>
-                      <Badge badgeContent={items[item.id].items.length}
-                             color="primary" className={classes.badge}>
-                        <MenuBookTwoToneIcon className={classes.bookIcon}/>
-                      </Badge>
-                    </div>
-                  </div>
-                </Card>)) : ('')}
-          </Box>
-          <Box className={classes.formBox} boxShadow={2}>
-            <Form items={items}/>
-          </Box>
-        </Box>
-      </Container>
-  )
+    return (
+        <Container className={classes.container}>
+            <Link to='/' className={classes.link}>
+                <Button variant="contained" color="primary">
+                    Back
+                </Button>
+            </Link>
+            <Typography component="h2" variant="h6">
+                Ostoskori
+            </Typography>
+            <Typography component="h2" variant="h6">
+                Yhteensä {totalPrice.toFixed(2)} €
+            </Typography>
+            <Box className={classes.boxWrapper}>
+                <Box className={classes.box}>
+                    {totalCount ? addedBooks.map((item) => (
+                        <Card className={classes.root} key={item.id}>
+                            <CardMedia
+                                className={classes.cover}
+                                image={`https:${item.imgSmall}`}
+                                title={item.title}
+                            />
+                            <div className={classes.details}>
+                                <CardContent className={classes.content}>
+                                    <Typography component="h6" variant="h6">
+                                        {item.title}
+                                    </Typography>
+                                    <Typography variant="subtitle1" color="textSecondary">
+                                        {item.author}
+                                    </Typography>
+                                    <Typography variant="h6" color="initial">
+                                        {items[item.id].totalPrice.toFixed(2)} €
+                                    </Typography>
+                                </CardContent>
+                                <div className={classes.controls}>
+                                    <IconButton aria-label="minus" onClick={() => onMinus(item.id)}>
+                                        <RemoveIcon/>
+                                    </IconButton>
+                                    <IconButton aria-label="delete" onClick={() => onRemove(item.id)}>
+                                        <DeleteIcon/>
+                                    </IconButton>
+                                    <IconButton aria-label="plus" onClick={() => onPlus(item.id)}>
+                                        <AddIcon/>
+                                    </IconButton>
+                                    <Badge badgeContent={items[item.id].items.length}
+                                           color="primary">
+                                        <MenuBookTwoToneIcon className={classes.bookIcon}/>
+                                    </Badge>
+                                </div>
+                            </div>
+                        </Card>)) : ('')}
+                </Box>
+                <Box className={classes.formBox} boxShadow={2}>
+                    <Form items={items}/>
+                </Box>
+            </Box>
+        </Container>
+    )
 }
 
 export default Cart

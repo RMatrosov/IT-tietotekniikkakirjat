@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {searchBooks} from "../../redux/action/search";
 import {Link} from "react-router-dom";
 import {StyledBadge, useStyles} from "./styles";
+import {AppStateType} from "../../redux/store";
 
 
 
@@ -15,11 +16,11 @@ const Header = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  function onSearch(value) {
+  function onSearch(value:string) {
     dispatch(searchBooks(value))
   }
 
-  const {totalCount} = useSelector(({cart}) => cart);
+  const {totalCount} = useSelector((state: AppStateType) => state.cart);
 
   return (
       <div className={classes.root}>
