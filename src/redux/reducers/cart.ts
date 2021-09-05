@@ -2,6 +2,7 @@ import {ADD_BOOK_CART, MINUS_CART_ITEM, PLUS_CART_ITEM, REMOVE_CART_ITEM} from "
 import {itemsType} from "./books";
 import {CartActionTypes} from "../action/cart";
 
+
 interface cartItemsType {
     items: Array<itemsType>
     totalPrice: number
@@ -28,9 +29,10 @@ const _get = (obj: any, path: any) => {
     }, obj[firstKey]);
 };
 
-const getTotalSum = (obj: any, path: any) => {
+const getTotalSum = (obj: {}, path: string) => {
     return Object.values(obj).reduce((sum, obj) => {
         const value = _get(obj, path);
+
         return sum + value;
     }, 0);
 };
@@ -38,6 +40,7 @@ const getTotalSum = (obj: any, path: any) => {
 const cart = (state = initialState, action: CartActionTypes): InitialStateType => {
     switch (action.type) {
         case ADD_BOOK_CART: {
+
             const currenItems = !state.items[action.payload.id]
                 ? [action.payload]
                 : [...state.items[action.payload.id].items, action.payload];
@@ -123,8 +126,8 @@ const cart = (state = initialState, action: CartActionTypes): InitialStateType =
             };
         }
 
-       /* case 'CLEAR_CART':
-            return {totalPrice: 0, totalCount: 0, items: {}};*/
+        /* case 'CLEAR_CART':
+             return {totalPrice: 0, totalCount: 0, items: {}};*/
 
         default:
             return state;

@@ -7,7 +7,6 @@ import paginate from "./paginate";
 
 export type RootReducerType = typeof rootReducer
 
-
 const rootReducer = combineReducers({
   books,
   search,
