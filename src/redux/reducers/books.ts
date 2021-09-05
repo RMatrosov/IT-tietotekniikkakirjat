@@ -1,12 +1,12 @@
 import {SET_BOOKS, SET_LOADED} from "../constants/constants";
 import {ActionType} from "../action/books";
 
-export type itemsType = {
-    author: string
+export interface itemsType {
+    [author:string]: string
     id: string
     imgMedium: string
     imgSmall: string
-    price: number
+    price: number | any
     title: string
     type: string
 }
