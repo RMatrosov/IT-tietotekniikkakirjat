@@ -19,8 +19,8 @@ const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {
 
     const search = useSelector((state: AppStateType) => state.search);
 
-    let dataSearch = items.filter((item: itemsType) => {
-        return Object.keys(item).some((key:string) =>
+    const dataSearch: Array<itemsType> = items.filter((item: itemsType) => {
+        return Object.keys(item).some((key: string) =>
             item[key].toString().toLowerCase().includes(search.search.toString().toLowerCase())
         )
     })
