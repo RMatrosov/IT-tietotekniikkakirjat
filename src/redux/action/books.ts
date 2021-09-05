@@ -30,7 +30,7 @@ export const fetchBooks = (page: number, type: string | null, order: string | nu
             payload: false,
         });
 
-        axios.get(`https://tietotekniikkakirjat.herokuapp.com/api/books?_page=${page}&_sort=${type ? type : ''}&_order=${order ? order : ''}`).then(({data}) => {
+        axios.get(`http://localhost:3001/books?_page=${page}&_sort=${type ? type : ''}&_order=${order ? order : ''}`).then(({data}) => {
             dispatch(setBooks(data));
         });
     }

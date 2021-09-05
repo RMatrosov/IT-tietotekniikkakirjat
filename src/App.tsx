@@ -44,7 +44,7 @@ function App() {
     }, [dispatch, currentPage, type, order]);
 
     useEffect(() => {
-        axios.get(`https://tietotekniikkakirjat.herokuapp.com/api/books`)
+        axios.get(`http://localhost:3001/books?`)
             .then(({data}) => {
                 dispatch(setTotalItemCount(data.length))
             })
