@@ -12,7 +12,6 @@ type MainTypesProps = {
     items: Array<itemsType>
 }
 
-
 const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {
 
 
