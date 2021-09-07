@@ -1,11 +1,12 @@
-import React, {FunctionComponent, ReactElement, useState} from "react";
+import React, {FC, ReactElement, useState} from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {Box, Button, FormControlLabel, Switch, TextField} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {useStyles} from "./styles";
-import {InitialStateType} from "../../redux/reducers/cart";
+import {InitialStateType} from "../../types/cart";
+
 
 const schema = yup.object().shape({
   firstName: yup
@@ -33,7 +34,7 @@ type FormTypesProps = {
 }
 
 
-const Form: FunctionComponent<FormTypesProps> = ({items}): ReactElement => {
+const Form: FC<FormTypesProps> = ({items}): ReactElement => {
 
   const classes = useStyles();
 

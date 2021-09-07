@@ -1,18 +1,6 @@
 import {ADD_BOOK_CART, MINUS_CART_ITEM, PLUS_CART_ITEM, REMOVE_CART_ITEM} from "../constants/constants";
-import {itemsType} from "./books";
-import {CartActionTypes} from "../action/cart";
+import {CartActionTypes, InitialStateType} from "../../types/cart";
 
-
-interface cartItemsType {
-    items: Array<itemsType>
-    totalPrice: number
-}
-
-export type InitialStateType = {
-    items: any,
-    totalPrice: any,
-    totalCount: any,
-}
 
 const initialState: InitialStateType = {
     items: {},
@@ -37,9 +25,10 @@ const getTotalSum = (obj: {}, path: string) => {
     }, 0);
 };
 
-const cart = (state = initialState, action: CartActionTypes): InitialStateType => {
+const cart = (state = initialState, action: CartActionTypes) => {
     switch (action.type) {
         case ADD_BOOK_CART: {
+
 
             const currenItems = !state.items[action.payload.id]
                 ? [action.payload]

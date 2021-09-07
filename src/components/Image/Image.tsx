@@ -6,7 +6,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import {Button} from "@material-ui/core";
 import {useStyles} from "./styles";
-import {itemsType} from "../../redux/reducers/books";
+import {itemsType} from "../../types/books";
+
 
 type ImageTypesProps = {
     items: Array<itemsType>

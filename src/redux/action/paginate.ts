@@ -1,25 +1,16 @@
 import {SET_CURRENT_PAGE, SET_TOTAL_ITEM_COUNT} from "../constants/constants";
+import {PaginateActionType} from "../../types/paginate";
 
 
-type setTotalItemCountActionType = {
-    type: typeof SET_TOTAL_ITEM_COUNT,
-    payload: number
-}
 
-type setCurrentPageActionType = {
-    type: typeof SET_CURRENT_PAGE,
-    payload: number
-}
 
-export type PaginateActionType = setTotalItemCountActionType | setCurrentPageActionType
-
-export const setTotalItemCount = (value: number): setTotalItemCountActionType => ({
+export const setTotalItemCount = (value: number): PaginateActionType => ({
     type: SET_TOTAL_ITEM_COUNT,
     payload: value,
 });
 
 
-export const setCurrentPage = (value: number): setCurrentPageActionType => ({
+export const setCurrentPage = (value: number): PaginateActionType => ({
     type: SET_CURRENT_PAGE,
     payload: value,
 });

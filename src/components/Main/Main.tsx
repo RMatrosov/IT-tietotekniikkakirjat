@@ -3,9 +3,9 @@ import {useSelector} from "react-redux";
 import CardItem from "../Card/Card";
 import Skeleton from '@material-ui/lab/Skeleton';
 import {Page} from "../Page/Page";
-import {itemsType} from "../../redux/reducers/books";
 import {FunctionComponent, ReactElement} from "react";
 import {AppStateType} from "../../redux/store";
+import {itemsType} from "../../types/books";
 
 
 type MainTypesProps = {

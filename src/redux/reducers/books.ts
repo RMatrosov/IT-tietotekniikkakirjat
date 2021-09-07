@@ -1,20 +1,7 @@
 import {SET_BOOKS, SET_LOADED} from "../constants/constants";
-import {ActionType} from "../action/books";
+import {ActionType, InitialStateType} from "../../types/books";
 
-export interface itemsType {
-    [author:string]: string
-    id: string
-    imgMedium: string
-    imgSmall: string
-    price: number | any
-    title: string
-    type: string
-}
 
-export type InitialStateType = {
-    items: Array<itemsType>
-    isLoaded: boolean
-}
 
 const initialState: InitialStateType = {
     items: [],

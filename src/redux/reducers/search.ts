@@ -1,9 +1,7 @@
 import {SEARCH_BOOKS} from "../constants/constants";
-import {searchBooksActionType} from "../action/search";
+import {InitialStateType, searchBooksActionType} from "../../types/search";
 
-export type InitialStateType = {
-    search: string
-}
+
 
 const initialState: InitialStateType = {
     search: '',

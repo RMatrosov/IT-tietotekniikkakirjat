@@ -1,13 +1,8 @@
 import {SET_SORT_BY} from "../constants/constants";
-import {setSortByActionType} from "../action/filter";
+import {InitialStateType, setSortByActionType} from "../../types/filter";
 
 
-export type InitialStateType = {
-    sortBy: {
-        type: string | null,
-        order: string | null,
-    },
-}
+
 
 const initialState: InitialStateType = {
     sortBy: {

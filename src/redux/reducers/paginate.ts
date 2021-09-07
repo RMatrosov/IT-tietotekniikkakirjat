@@ -1,12 +1,6 @@
 import {SET_CURRENT_PAGE, SET_TOTAL_ITEM_COUNT} from "../constants/constants";
-import {PaginateActionType} from "../action/paginate";
+import {InitialStateType, PaginateActionType} from "../../types/paginate";
 
-
-export type InitialStateType = {
-    totalItemCount: number,
-    currentPage: number,
-    defaultItemsCount: number
-}
 
 const initialState: InitialStateType = {
     totalItemCount: 0,

@@ -12,7 +12,7 @@ import Cart from "./components/Cart/Cart";
 import axios from "axios";
 import {setTotalItemCount} from "./redux/action/paginate";
 import {AppStateType} from "./redux/store";
-import {ISortItemsType} from "./components/interfaces/ISortItemsType";
+import {ISortItemsType} from "./types/ISortItemsType";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -44,7 +44,7 @@ function App() {
     }, [dispatch, currentPage, type, order]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/books?`)
+        axios.get(`https://tietotekniikkakirjat.herokuapp.com/books?`)
             .then(({data}) => {
                 dispatch(setTotalItemCount(data.length))
             })

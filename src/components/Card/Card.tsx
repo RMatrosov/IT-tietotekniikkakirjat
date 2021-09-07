@@ -9,15 +9,15 @@ import {useDispatch} from "react-redux";
 
 import {useStyles} from "./styles";
 import {addBookToCart} from "../../redux/action/cart";
-import {FunctionComponent, ReactElement} from "react";
-import {itemsType} from "../../redux/reducers/books";
+import {FC, ReactElement} from "react";
+import {itemsType} from "../../types/books";
 
 
 type CartItemTypesProps = {
     card: itemsType
 }
 
-const CardItem: FunctionComponent<CartItemTypesProps> = (card): ReactElement => {
+const CardItem: FC<CartItemTypesProps> = (card): ReactElement => {
 
     const classes = useStyles();
 

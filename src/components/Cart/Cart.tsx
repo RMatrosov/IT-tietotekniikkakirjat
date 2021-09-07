@@ -38,10 +38,11 @@ const Cart = () => {
         dispatch(plusCartItem(id))
     }
 
-    const addedBooks = Object.keys(items).map((key:string) => {
+
+    const addedBooks = Object.keys(items).map((key: string) => {
         return items[key].items[0];
     });
-    
+
     return (
         <Container className={classes.container}>
             <Link to='/' className={classes.link}>
