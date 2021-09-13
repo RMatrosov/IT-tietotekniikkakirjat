@@ -24,8 +24,6 @@ const Cart = () => {
     const {cartList} = useSelector((state: AppStateType) => state.cart);
     const dispatch = useDispatch()
 
-    console.log(cartList)
-
     function onRemove(id: string) {
         if (window.confirm('Poistaa?')) {
             dispatch(removeCartItem(id))
