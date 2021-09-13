@@ -15,15 +15,17 @@ import Form from "../Form/Form";
 import {useStyles} from "./styles";
 import {minusCartItem, plusCartItem, removeCartItem} from "../../redux/action/cart";
 import {AppStateType} from "../../redux/store";
+import {ICart} from "../../types/cart";
 
 
 const Cart = () => {
     const classes = useStyles();
 
-    const {totalPrice, items, cartList} = useSelector((state: AppStateType) => state.cart);
+    const {cartList} = useSelector((state: AppStateType) => state.cart);
     const dispatch = useDispatch()
 
     console.log(cartList)
+
     function onRemove(id: string) {
         if (window.confirm('Poistaa?')) {
             dispatch(removeCartItem(id))
@@ -39,9 +41,11 @@ const Cart = () => {
     }
 
 
-    const addedBooks = Object.keys(items).map((key: string) => {
-        return items[key].items[0];
-    });
+    let priceArr = cartList.map((item: ICart) => {
+        return item.product.price * item.quantity
+    })
+    let totalPrice = priceArr.reduce((sum: number, i: number) => i + sum, 0);
+
 
     return (
         <Container className={classes.container}>
@@ -58,36 +62,36 @@ const Cart = () => {
             </Typography>
             <Box className={classes.boxWrapper}>
                 <Box className={classes.box}>
-                    {addedBooks ? addedBooks.map((item) => (
-                        <Card className={classes.root} key={item.id}>
+                    {cartList ? cartList.map((item: ICart) => (
+                        <Card className={classes.root} key={item.product.id}>
                             <CardMedia
                                 className={classes.cover}
-                                image={`https:${item.imgSmall}`}
-                                title={item.title}
+                                image={`https:${item.product.imgSmall}`}
+                                title={item.product.title}
                             />
                             <div className={classes.details}>
                                 <CardContent className={classes.content}>
                                     <Typography component="h6" variant="h6">
-                                        {item.title}
+                                        {item.product.title}
                                     </Typography>
                                     <Typography variant="subtitle1" color="textSecondary">
-                                        {item.author}
+                                        {item.product.author}
                                     </Typography>
                                     <Typography variant="h6" color="initial">
-                                        {items[item.id].totalPrice.toFixed(2)} €
+                                        {(item.product.price * item.quantity).toFixed(2)} €
                                     </Typography>
                                 </CardContent>
                                 <div className={classes.controls}>
-                                    <IconButton aria-label="minus" onClick={() => onMinus(item.id)}>
+                                    <IconButton aria-label="minus" onClick={() => onMinus(item.product.id)}>
                                         <RemoveIcon/>
                                     </IconButton>
-                                    <IconButton aria-label="delete" onClick={() => onRemove(item.id)}>
+                                    <IconButton aria-label="delete" onClick={() => onRemove(item.product.id)}>
                                         <DeleteIcon/>
                                     </IconButton>
-                                    <IconButton aria-label="plus" onClick={() => onPlus(item.id)}>
+                                    <IconButton aria-label="plus" onClick={() => onPlus(item.product.id)}>
                                         <AddIcon/>
                                     </IconButton>
-                                    <Badge badgeContent={items[item.id].items.length}
+                                    <Badge badgeContent={item.quantity}
                                            color="primary">
                                         <MenuBookTwoToneIcon className={classes.bookIcon}/>
                                     </Badge>
@@ -96,7 +100,7 @@ const Cart = () => {
                         </Card>)) : ('')}
                 </Box>
                 <Box className={classes.formBox} boxShadow={2}>
-                    <Form items={items}/>
+                    <Form items={cartList}/>
                 </Box>
             </Box>
         </Container>

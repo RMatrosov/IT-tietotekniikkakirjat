@@ -1,7 +1,6 @@
 import {Container, makeStyles} from "@material-ui/core";
 import Main from "./components/Main/Main";
 import Header from "./components/Header/Header";
-
 import SortPopup from "./components/SortPopup/SortPopup";
 import {useEffect} from "react";
 import {fetchBooks} from "./redux/action/books";
@@ -14,7 +13,7 @@ import axios from "axios";
 import {setTotalItemCount} from "./redux/action/paginate";
 import {AppStateType} from "./redux/store";
 import {ISortItemsType} from "./types/ISortItemsType";
-import Test from "./components/test";
+
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -61,7 +60,6 @@ function App() {
                     <Header/>
                     <SortPopup onSortBy={onSortBy}/>
                     <Main items={items}/>
-                    <Test/>
                 </Route>
                 <Route path='/cart'>
 

@@ -1,20 +1,13 @@
 import {itemsType} from "./books";
 import {ADD_BOOK_CART, MINUS_CART_ITEM, PLUS_CART_ITEM, REMOVE_CART_ITEM} from "../redux/constants/constants";
 
-
-interface cartItemsType {
-    id: {
-        items: Array<itemsType>
-        totalPrice: number
-    }
-
+export interface ICart {
+    product: itemsType
+    quantity: number
 }
 
 export interface InitialStateType {
-    items: cartItemsType | any
-    totalPrice: number | any
-    totalCount: number | any
-    cartList: any
+    cartList: ICart[]
 }
 
 export type CartActionTypes =

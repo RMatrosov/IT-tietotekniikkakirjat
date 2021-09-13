@@ -5,7 +5,7 @@ import * as yup from "yup";
 import {Box, Button, FormControlLabel, Switch, TextField} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {useStyles} from "./styles";
-import {InitialStateType} from "../../types/cart";
+import {ICart, InitialStateType} from "../../types/cart";
 
 
 const schema = yup.object().shape({
@@ -29,8 +29,9 @@ const schema = yup.object().shape({
       .required("Syötä kaupunki"),
 });
 
+
 type FormTypesProps = {
-    items: InitialStateType
+    items: ICart[]
 }
 
 
