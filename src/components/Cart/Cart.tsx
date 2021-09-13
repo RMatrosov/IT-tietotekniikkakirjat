@@ -20,10 +20,10 @@ import {AppStateType} from "../../redux/store";
 const Cart = () => {
     const classes = useStyles();
 
-    const {totalPrice, totalCount, items} = useSelector((state: AppStateType) => state.cart);
+    const {totalPrice, items, cartList} = useSelector((state: AppStateType) => state.cart);
     const dispatch = useDispatch()
 
-
+    console.log(cartList)
     function onRemove(id: string) {
         if (window.confirm('Poistaa?')) {
             dispatch(removeCartItem(id))
@@ -58,7 +58,7 @@ const Cart = () => {
             </Typography>
             <Box className={classes.boxWrapper}>
                 <Box className={classes.box}>
-                    {totalCount ? addedBooks.map((item) => (
+                    {addedBooks ? addedBooks.map((item) => (
                         <Card className={classes.root} key={item.id}>
                             <CardMedia
                                 className={classes.cover}

@@ -5,6 +5,8 @@ import {AppStateType} from "../store";
 import {ActionType, itemsType, setBooksActionType} from "../../types/books";
 
 
+export const ROOT_API_URL = 'http://localhost:3001/'
+export const url = new URL(`${ROOT_API_URL}books?`)
 
 export const setLoaded = (payload: boolean) => ({
     type: SET_LOADED,
@@ -20,13 +22,25 @@ export const fetchBooks = (page: number, type: string | null, order: string | nu
             payload: false,
         });
 
-        axios.get(`http://localhost:3001/books?_page=${page}&_sort=${type ? type : ''}&_order=${order ? order : ''}`).then(({data}) => {
+
+        url.search = new URLSearchParams({
+            '_page': page.toString(),
+            '_sort': type ? type : '',
+            '_order': order ? order : ''
+        }).toString();
+
+        axios.get(url.toString()).then(({data}) => {
             dispatch(setBooks(data));
-        });
+        })
+
+
+        /*axios.get(`http://localhost:3001/books?_page=${page}&_sort=${type ? type : ''}&_order=${order ? order : ''}`).then(({data}) => {
+            dispatch(setBooks(data));
+        });*/
     }
 }
 
-export const setBooks = (items: Array<itemsType>): setBooksActionType => ({
+export const setBooks = (items: itemsType[]): setBooksActionType => ({
     type: SET_BOOKS,
     payload: items,
 });

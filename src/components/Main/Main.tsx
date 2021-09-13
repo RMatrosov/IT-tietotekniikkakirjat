@@ -1,5 +1,5 @@
 import {Box, Grid} from "@material-ui/core";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import CardItem from "../Card/Card";
 import Skeleton from '@material-ui/lab/Skeleton';
 import {Page} from "../Page/Page";
@@ -12,17 +12,23 @@ type MainTypesProps = {
     items: Array<itemsType>
 }
 
-const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {
+type TFilterFields = Pick<itemsType, 'author' | 'title' | 'type'>;
 
+const filterFields = ['author', 'title', 'type']
+
+const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {
 
     const isLoaded = useSelector((state: AppStateType) => state.books.isLoaded);
 
     const search = useSelector((state: AppStateType) => state.search);
 
     const dataSearch: Array<itemsType> = items.filter((item: itemsType) => {
-        return Object.keys(item).some((key: string) =>
-            item[key].toString().toLowerCase().includes(search.search.toString().toLowerCase())
-        )
+        return Object.keys(item)
+            .filter(key => filterFields.includes(key))
+            .some((key: string) =>
+                filterFields.includes(key) &&
+                (item[key]).toString().toLowerCase().includes(search.search.toString().toLowerCase())
+            )
     })
 
     return (

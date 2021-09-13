@@ -6,6 +6,7 @@ const initialState: InitialStateType = {
     items: {},
     totalPrice: 0,
     totalCount: 0,
+    cartList: {}
 };
 
 const getTotalPrice = (arr: any[]) => arr.reduce((sum, obj) => obj.price + sum, 0);
@@ -18,14 +19,15 @@ const _get = (obj: any, path: any) => {
 };
 
 const getTotalSum = (obj: {}, path: string) => {
-    return Object.values(obj).reduce((sum, obj) => {
-        const value = _get(obj, path);
 
+    return Object.values(obj).reduce((sum, obj) => {
+
+        const value = _get(obj, path);
         return sum + value;
     }, 0);
 };
 
-const cart = (state = initialState, action: CartActionTypes) => {
+const cart = (state = initialState, action: CartActionTypes | any) => {
     switch (action.type) {
         case ADD_BOOK_CART: {
 
@@ -42,6 +44,7 @@ const cart = (state = initialState, action: CartActionTypes) => {
                 },
             };
 
+
             const totalCount = getTotalSum(newItems, 'items.length');
             const totalPrice = getTotalSum(newItems, 'totalPrice');
 
@@ -50,6 +53,7 @@ const cart = (state = initialState, action: CartActionTypes) => {
                 items: newItems,
                 totalCount,
                 totalPrice,
+                cartList: newItems
             };
         }
 
@@ -57,8 +61,10 @@ const cart = (state = initialState, action: CartActionTypes) => {
             const newItems = {
                 ...state.items,
             };
+
             const currentTotalPrice = newItems[action.payload].totalPrice;
             const currentTotalCount = newItems[action.payload].items.length;
+
             delete newItems[action.payload];
             return {
                 ...state,
@@ -121,6 +127,6 @@ const cart = (state = initialState, action: CartActionTypes) => {
         default:
             return state;
     }
-};
+}
 
 export default cart;
