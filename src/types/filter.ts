@@ -4,12 +4,14 @@ export type InitialStateType = {
     sortBy: {
         type: string | null,
         order: string | null,
+        label: string
     },
 }
 
 type payloadType = {
     type: string | null
     order: string | null
+    label: string
 }
 
 export type setSortByActionType = {

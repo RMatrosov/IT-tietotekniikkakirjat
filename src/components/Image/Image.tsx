@@ -51,7 +51,7 @@ const Image: FunctionComponent<ImageTypesProps> = ({items}): ReactElement => {
                         title={image.title}
                     />
                     <Link to='/' className={classes.link}>
-                        <Button variant="contained" color="primary">
+                        <Button className={classes.btn}>
                             Back
                         </Button>
                     </Link>

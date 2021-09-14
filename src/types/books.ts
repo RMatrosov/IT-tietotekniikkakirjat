@@ -11,13 +11,13 @@ export interface itemsType {
 }
 
 export interface InitialStateType {
-    items: Array<itemsType>
+    items: itemsType[]
     isLoaded: boolean
 }
 
 export interface setBooksActionType {
     type: typeof SET_BOOKS,
-    payload: Array<itemsType>
+    payload: itemsType[]
 }
 
 export interface setLoadedActionType {

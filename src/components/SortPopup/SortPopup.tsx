@@ -1,20 +1,21 @@
 import React, {FunctionComponent, ReactElement} from 'react';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import {useStyles} from "./styles";
 import {ISortItemsType} from "../../types/ISortItemsType";
-
+import {Button, ButtonGroup} from "@material-ui/core";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../redux/store";
 
 
 type SortPopupTypesProps = {
-    onSortBy(item: ISortItemsType):void
+    onSortBy(item: ISortItemsType): void
 }
 
 const SortPopup: FunctionComponent<SortPopupTypesProps> = ({onSortBy}): ReactElement => {
 
     const classes = useStyles();
+
+    const {label} = useSelector((state: AppStateType) => state.filters.sortBy);
 
     const sortItems = [
         {name: 'Kaikki', type: '', order: '', label: 'all'},
@@ -26,18 +27,14 @@ const SortPopup: FunctionComponent<SortPopupTypesProps> = ({onSortBy}): ReactEle
 
     return (
         <FormControl component="fieldset" className={classes.root}>
-            <RadioGroup row aria-label="position" name="position"
-                        defaultValue="all">
-                {sortItems.map((item, index) => <FormControlLabel
+            <div className={classes.btnGroup}>
+                {sortItems.map((item, index) => <Button
                     key={`${item.type}_${index}`}
-                    value={item.label}
-                    control={<Radio color="default"/>}
-                    label={item.name}
-                    labelPlacement="bottom"
-                    onChange={() => onSortBy(item)}
-                    className={classes.label}
-                />)}
-            </RadioGroup>
+                    onClick={() => onSortBy(item)}
+                    className={label === item.label ?
+                        classes.activeBtn : classes.btn}
+                >{item.name}</Button>)}
+            </div>
         </FormControl>
     )
 };

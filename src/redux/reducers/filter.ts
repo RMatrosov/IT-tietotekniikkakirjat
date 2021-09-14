@@ -8,6 +8,7 @@ const initialState: InitialStateType = {
     sortBy: {
         type: null,
         order: null,
+        label: 'all'
     },
 };
 

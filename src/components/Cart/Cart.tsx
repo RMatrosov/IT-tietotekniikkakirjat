@@ -48,7 +48,7 @@ const Cart = () => {
     return (
         <Container className={classes.container}>
             <Link to='/' className={classes.link}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" className={classes.backBtn}>
                     Back
                 </Button>
             </Link>
@@ -69,10 +69,10 @@ const Cart = () => {
                             />
                             <div className={classes.details}>
                                 <CardContent className={classes.content}>
-                                    <Typography component="h6" variant="h6">
+                                    <Typography className={classes.title}>
                                         {item.product.title}
                                     </Typography>
-                                    <Typography variant="subtitle1" color="textSecondary">
+                                    <Typography className={classes.authorText}>
                                         {item.product.author}
                                     </Typography>
                                     <Typography variant="h6" color="initial">
@@ -97,7 +97,7 @@ const Cart = () => {
                             </div>
                         </Card>)) : ('')}
                 </Box>
-                <Box className={classes.formBox} boxShadow={2}>
+                <Box className={classes.formBox} >
                     <Form items={cartList}/>
                 </Box>
             </Box>

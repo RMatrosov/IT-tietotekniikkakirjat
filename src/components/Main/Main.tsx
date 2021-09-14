@@ -36,8 +36,8 @@ const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {
             <Grid container
                   direction="row"
                   justifyContent="space-evenly"
-                  spacing={6}>
-                {isLoaded ? dataSearch.map((card) => <Grid item key={card.id} xs={12} sm={6} md={4}>
+                  spacing={4}>
+                {isLoaded ? dataSearch.map((card) => <Grid item key={card.id} xs={12} sm={5} md={3}>
                     <CardItem card={card}/>
                 </Grid>) : Array(6)
                     .fill(0)

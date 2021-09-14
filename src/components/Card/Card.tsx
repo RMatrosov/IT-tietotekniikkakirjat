@@ -41,7 +41,7 @@ const CardItem: FC<CartItemTypesProps> = (card): ReactElement => {
                         title="Contemplative Reptile"
                         className={classes.media}
                     />
-                    <CardContent className={classes.cardContext}>
+                    <CardContent className={classes.cardContent}>
                         <Typography gutterBottom variant="h6" component="h2" className={classes.title}>
                             {title}
                         </Typography>
@@ -56,7 +56,7 @@ const CardItem: FC<CartItemTypesProps> = (card): ReactElement => {
             </Link>
             <CardActions>
                 <Button fullWidth={true} onClick={() => onAddToCart(card.card)}
-                        variant="outlined">
+                        variant="outlined" className={classes.cardBtn}>
                     Lisää koriin
                 </Button>
             </CardActions>

@@ -17,9 +17,12 @@ import {ISortItemsType} from "./types/ISortItemsType";
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        backgroundColor: '#e0e0e0',
+        backgroundColor: '#ffffff',
         height: 'content'
     },
+    body: {
+        backgroundColor: '#e7f6ff'
+    }
 }));
 
 function App() {
@@ -30,8 +33,9 @@ function App() {
 
     function onSortBy(item: ISortItemsType) {
         const type = item.type;
-        const order = item.order
-            dispatch(setSortBy(type, order))
+        const order = item.order;
+        const label = item.label
+        dispatch(setSortBy(type, order, label))
     }
 
     const {currentPage} = useSelector((state: AppStateType) => state.paginate);
@@ -41,11 +45,11 @@ function App() {
     const items = useSelector((state: AppStateType) => state.books.items);
 
     useEffect(() => {
-                dispatch(fetchBooks(currentPage, type, order));
+        dispatch(fetchBooks(currentPage, type, order));
     }, [dispatch, currentPage, type, order]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3001/books?`)
+        axios.get(`https://tietotekniikkakirjat.herokuapp.com/books?`)
             .then(({data}) => {
                 dispatch(setTotalItemCount(data.length))
             })
@@ -53,25 +57,25 @@ function App() {
     }, [dispatch]);
 
     return (
+        <div className={classes.body}>
+            <Container maxWidth='md' className={classes.container}>
+                <Switch>
+                    <Route exact path='/'>
+                        <Header/>
+                        <SortPopup onSortBy={onSortBy}/>
+                        <Main items={items}/>
+                    </Route>
+                    <Route path='/cart'>
 
-        <Container maxWidth='md' className={classes.container}>
-            <Switch>
-                <Route exact path='/'>
-                    <Header/>
-                    <SortPopup onSortBy={onSortBy}/>
-                    <Main items={items}/>
-                </Route>
-                <Route path='/cart'>
-
-                    <Cart/>
-                </Route>
-                <Route path='/img/:title'>
-                    <Image items={items}/>
-                </Route>
-                <Redirect to={{pathname: '/'}}/>
-            </Switch>
-        </Container>
-
+                        <Cart/>
+                    </Route>
+                    <Route path='/img/:title'>
+                        <Image items={items}/>
+                    </Route>
+                    <Redirect to={{pathname: '/'}}/>
+                </Switch>
+            </Container>
+        </div>
     );
 }
 
