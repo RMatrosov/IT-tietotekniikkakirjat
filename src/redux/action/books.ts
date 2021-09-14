@@ -7,7 +7,7 @@ import {ActionType, itemsType, setBooksActionType} from "../../types/books";
 
 export const ROOT_API_URL = 'http://localhost:3001/'
 export const HEROKU_API_URL = 'https://tietotekniikkakirjat.herokuapp.com'
-export const url = new URL(`${ROOT_API_URL}books?`)
+export const url = new URL(`${HEROKU_API_URL}books?`)
 
 export const setLoaded = (payload: boolean) => ({
     type: SET_LOADED,
