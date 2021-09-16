@@ -32,7 +32,7 @@ const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {
     })
 
     return (
-        <Box style={{display: 'flex', flexDirection: 'column'}}>
+        <Box style={{display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
             <Grid container
                   direction="row"
                   justifyContent="space-evenly"
