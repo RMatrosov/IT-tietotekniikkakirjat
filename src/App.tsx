@@ -3,7 +3,7 @@ import Main from "./components/Main/Main";
 import Header from "./components/Header/Header";
 import SortPopup from "./components/SortPopup/SortPopup";
 import {useEffect} from "react";
-import {fetchBooks} from "./redux/action/books";
+import {fetchBooks, HEROKU_API_URL, ROOT_API_URL} from "./redux/action/books";
 import {useDispatch, useSelector} from "react-redux";
 import {setSortBy} from "./redux/action/filter";
 import {Switch, Route, Redirect} from "react-router-dom";
@@ -49,7 +49,7 @@ function App() {
     }, [dispatch, currentPage, type, order]);
 
     useEffect(() => {
-        axios.get(`https://tietotekniikkakirjat.herokuapp.com/books?`)
+        axios.get(`${HEROKU_API_URL}books?`)
             .then(({data}) => {
                 dispatch(setTotalItemCount(data.length))
             })

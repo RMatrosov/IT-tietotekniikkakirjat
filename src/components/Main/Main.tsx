@@ -39,9 +39,9 @@ const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {
                   spacing={4}>
                 {isLoaded ? dataSearch.map((card) => <Grid item key={card.id} xs={12} sm={5} md={3}>
                     <CardItem card={card}/>
-                </Grid>) : Array(6)
+                </Grid>) : Array(20)
                     .fill(0)
-                    .map((_, index) => <Skeleton key={index} variant="rect" width={270} height={280}/>)}
+                    .map((_, index) => <Skeleton style={{margin: '16px'}} key={index} variant="rect" width={200} height={420}/>)}
             </Grid>
             <Page/>
         </Box>
