@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 import CardItem from "../Card/Card";
 import Skeleton from '@material-ui/lab/Skeleton';
 import {Page} from "../Page/Page";
-import {FunctionComponent, ReactElement} from "react";
+import {FunctionComponent, ReactElement, useMemo} from "react";
 import {AppStateType} from "../../redux/store";
 import {itemsType} from "../../types/books";
 
@@ -22,14 +22,16 @@ const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {
 
     const search = useSelector((state: AppStateType) => state.search);
 
-    const dataSearch: Array<itemsType> = items.filter((item: itemsType) => {
-        return Object.keys(item)
-            .filter(key => filterFields.includes(key))
-            .some((key: string) =>
-                filterFields.includes(key) &&
-                (item[key]).toString().toLowerCase().includes(search.search.toString().toLowerCase())
-            )
-    })
+    const dataSearch: Array<itemsType> = useMemo(() => {
+        return items.filter((item: itemsType) => {
+            return Object.keys(item)
+                .filter(key => filterFields.includes(key))
+                .some((key: string) =>
+                    filterFields.includes(key) &&
+                    (item[key]).toString().toLowerCase().includes(search.search.toString().toLowerCase())
+                )
+        })
+    }, [search, items]);
 
     return (
         <Box style={{display: 'flex', flexDirection: 'column', minHeight: '90vh'}}>
@@ -41,7 +43,8 @@ const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {
                     <CardItem card={card}/>
                 </Grid>) : Array(20)
                     .fill(0)
-                    .map((_, index) => <Skeleton style={{margin: '16px'}} key={index} variant="rect" width={200} height={420}/>)}
+                    .map((_, index) => <Skeleton style={{margin: '16px'}} key={index} variant="rect" width={200}
+                                                 height={420}/>)}
             </Grid>
             <Page/>
         </Box>
