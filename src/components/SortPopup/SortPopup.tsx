@@ -2,7 +2,7 @@ import React, {FunctionComponent, ReactElement} from 'react';
 import FormControl from '@material-ui/core/FormControl';
 import {useStyles} from "./styles";
 import {ISortItemsType} from "../../types/ISortItemsType";
-import {Button, ButtonGroup} from "@material-ui/core";
+import {Button} from "@material-ui/core";
 import {useSelector} from "react-redux";
 import {AppStateType} from "../../redux/store";
 

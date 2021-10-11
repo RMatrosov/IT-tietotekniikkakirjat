@@ -12,8 +12,6 @@ type MainTypesProps = {
     items: Array<itemsType>
 }
 
-/*type TFilterFields = Pick<itemsType, 'author' | 'title' | 'type'>;*/
-
 const filterFields = ['author', 'title', 'type']
 
 const Main: FunctionComponent<MainTypesProps> = ({items}): ReactElement => {

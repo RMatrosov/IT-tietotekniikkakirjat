@@ -33,11 +33,6 @@ export const fetchBooks = (page: number, type: string | null, order: string | nu
         axios.get(url.toString()).then(({data}) => {
             dispatch(setBooks(data));
         })
-
-
-        /*axios.get(`http://localhost:3001/books?_page=${page}&_sort=${type ? type : ''}&_order=${order ? order : ''}`).then(({data}) => {
-            dispatch(setBooks(data));
-        });*/
     }
 }
 
